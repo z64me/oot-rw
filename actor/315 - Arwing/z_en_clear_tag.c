@@ -212,23 +212,23 @@ static void arwing_spawn_particle_flash(z64_global_t *global, vec3f_t *pos, floa
 	if( ! st )
 		return;
 	
-    st->type = PARTICLE_FLASH;
-    
-    st->pos = *pos;    
-    st->vel = (vec3f_t){0};    
-    st->acc = (vec3f_t){0};
-    
-    st->prim.a = 180.0f;
-    
-    // starts out infinitely small, then grows to the size specified
-    st->scale = 0.0f;
-    st->scale_b = scale + scale;
-    
-    // radial flash particle has two parts at different heights, so for this
-    // rot.y fills in as pos.y for one of those parts
-    st->rot.y = floor_height;
-    
-    st->up = *up;
+	st->type = PARTICLE_FLASH;
+	
+	st->pos = *pos;    
+	st->vel = (vec3f_t){0};    
+	st->acc = (vec3f_t){0};
+	
+	st->prim.a = 180.0f;
+	
+	// starts out infinitely small, then grows to the size specified
+	st->scale = 0.0f;
+	st->scale_b = scale + scale;
+	
+	// radial flash particle has two parts at different heights, so for this
+	// rot.y fills in as pos.y for one of those parts
+	st->rot.y = floor_height;
+	
+	st->up = *up;
 }
 void destroy(entity_t *en, z64_global_t *global) /* 0 internal, 1 external, 10 lines */
 {
@@ -238,20 +238,20 @@ void destroy(entity_t *en, z64_global_t *global) /* 0 internal, 1 external, 10 l
 void arwing_calculate_up_vector(entity_t *en) /* 0 internal, 1 external, 47 lines */
 {
 	z64_actor_t *actor = &en->actor;
-    float x;
-    float y;
+	float x;
+	float y;
 
-    z64_col_poly_t *floor_poly = actor->floor_poly;
+	z64_col_poly_t *floor_poly = actor->floor_poly;
 	if( !floor_poly )
 		return;
-    
-    // TODO explain the purpose of this number
+	
+	// TODO explain the purpose of this number
 	const float data_809DC0E8 = 0.0000305185f;
 
-    x = data_809DC0E8 * floor_poly->norm.x;
-    y = data_809DC0E8 * floor_poly->norm.y;
-    en->up.x = -external_func_800FD250( -( data_809DC0E8 * floor_poly->norm.z ) * y, 1.0f );
-    en->up.z =  external_func_800FD250( -x * y, 1.0f );
+	x = data_809DC0E8 * floor_poly->norm.x;
+	y = data_809DC0E8 * floor_poly->norm.y;
+	en->up.x = -external_func_800FD250( -( data_809DC0E8 * floor_poly->norm.z ) * y, 1.0f );
+	en->up.z =  external_func_800FD250( -x * y, 1.0f );
 }
 
 // fire particles used by Arwing when it's falling to the ground
@@ -268,8 +268,8 @@ void arwing_spawn_particle_fire(z64_global_t *global, vec3f_t *pos, float scale)
 	st->type = PARTICLE_FIRE;
 	st->seed = math_rand_f32(100);
 	
-    st->pos = *pos;
-    
+	st->pos = *pos;
+	
 	st->vel = (vec3f_t){0};
 	
 	st->acc = (vec3f_t){0, 0.15f ,0 };
@@ -289,8 +289,8 @@ void arwing_spawn_particle_debris(z64_global_t *global, vec3f_t *pos, vec3f_t *v
 	st->type = PARTICLE_DEBRIS;
 	st->seed = math_rand_f32(10);
 	
-    st->pos = *pos;
-    
+	st->pos = *pos;
+	
 	st->vel = *vel;
 	
 	st->acc = *acc;
@@ -317,7 +317,7 @@ void arwing_spawn_particle_smoke(z64_global_t *global, vec3f_t *pos, float scale
 	st->type = PARTICLE_SMOKE;
 	st->seed = math_rand_f32(100.0f);
 	
-    st->pos = *pos;    
+	st->pos = *pos;    
 	st->vel = (vec3f_t){0};	
 	st->acc = (vec3f_t){0};
 	
